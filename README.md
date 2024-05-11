@@ -64,3 +64,5 @@
    ```
    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install prop-types
    ```
+
+### 코딩 시작
