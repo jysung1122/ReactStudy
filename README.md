@@ -33,3 +33,34 @@
    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm start
    ```
 5. 그러면 디폴트로 localhost:3000 로 React App 웹페이지 생성됨
+6. src 폴더 안에 index.js와 App.js 빼고 모두 삭제
+7. 두 파일을 아래 코드로 변경 (맨 기본으로 초기화)
+   - index.js
+     ```
+     import React from 'react';
+     import ReactDOM from 'react-dom';
+     import App from './App';
+     
+     ReactDOM.render(
+       <React.StrictMode>
+         <App />
+       </React.StrictMode>,
+       document.getElementById('root')
+     );
+     ```
+   - App.js
+     ```
+     function App() {
+       return (
+         <div>
+             <h1>Welcome back!</h1>
+         </div>
+       );
+     }
+     
+     export default App;
+     ```
+8. vscode에서 새로운 터미널을 하나 더 열어서 아래 코드 입력 (ReactEX 파일에서 학습한 PropTypes 다운)
+   ```
+   seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install prop-types
+   ```
