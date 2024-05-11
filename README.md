@@ -32,3 +32,4 @@
    ```
    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm start
    ```
+5. 그러면 디폴트로 localhost:3000 로 React App 웹페이지 생성됨
