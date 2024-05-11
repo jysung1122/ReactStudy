@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function Btn({ text, onClick } ) {
+            console.log(text, " was rendered");
+            return (
+                <button 
+                    onClick = {onClick}             //밑에서 Prop을 받아와서 이벤트리스너에 적용 */
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10
+                    }}
+                >
+                    {text}
+                </button>
+            );
+        }
+
+        const MemorizedBtn = React.memo(Btn); {/* 부모 App 함수 안의 객체 중 re-render 필요없으면 하지않음 */}
+
+        function App() {
+
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes")    /* Prop이 변하면 state도 변함 -> 부모객체 모두 re-render */
+
+            return (
+                <div>
+                    <MemorizedBtn text={value} onClick={changeValue}/>   {/* text와 onClick은 Prop 이다, 이벤트리스너 X */}
+                    <MemorizedBtn text="Cofirm"/>                        {/* <Btn ~~/> : 변화가 없어도 re-render됨 */}
+                </div>
+            );
+        }
+
+        const root = document.getElementById("root");
+        ReactDOM.render(<App/>, root);
+
+    </script>
+</html>

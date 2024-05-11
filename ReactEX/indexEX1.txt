@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        
+        function App() {
+            //array = [1, 2, 3]
+            //val = a[0] : 1
+            //[a, b, c] = array => a:1 b:2 c:3 위와 다르게 더 짧고 편하게 가능
+            //React.useState 함수는 counter 같은 데이터를 숫자형 데이터로 건네주고
+            //setCounter와 같이 그 데이터 값을 바꿀 함수도 함께 줌
+            const [counter, setCounter] = React.useState(0);
+
+            const onClick = () => {
+                //setCounter(counter + 1); //리렌더링
+                setCounter((current) => current + 1);   //더 나은 방법
+            }
+
+            return (
+                <div>
+                    <h3> Total Clicks : {counter}</h3>
+                    <button onClick = {onClick}> Click Me </button>
+                </div>
+            );
+        }
+
+        const root = document.getElementById("root");
+        ReactDOM.render(<App/>, root);
+    </script>
+</html>
