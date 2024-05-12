@@ -63,3 +63,50 @@
    ```
 
 ### 코딩 시작
+- useState에 이어서 useEffect 사용법
+  ```
+   // src/App.js
+   import Button from "./Button";
+   import styles from "./App.module.css";
+   import { useState, useEffect } from "react";
+   
+   function App() {
+   
+     const [counter, setCounter] = useState(0);
+     const onClick = () => setCounter((prev) => prev + 1);
+   
+     const [keyword, setKeyword] = useState("");
+     const onChange = (event) => setKeyword(event.target.value);
+   
+     //처음 실행될 때 한번만 실행되는 코드
+     useEffect(() => {
+       console.log("i run only once");
+     }, []);
+   
+     //keyword가 변화할때 마다 실행되는 코드
+     useEffect(() => {
+       console.log("i run when keyword changes");
+     },[keyword]);
+   
+     //counter가 변화할때 마다 실행되는 코드
+     useEffect(() => {
+       console.log("i run when counter changes");
+     },[counter]);
+   
+     //keyword & counter가 변화할때 마다 실행되는 코드
+     useEffect(() => {
+       console.log("i run when keyword & counter changes");
+     }, [keyword, counter]);
+   
+     return (
+       <div>
+           <input value={keyword} onChange={onChange} type="text" placeholder="Search here..."/>
+           <h1 className={styles.title}>{counter}</h1>
+           <button onClick={onClick}>Click me</button>
+           <Button text="Continue"/>
+       </div>
+     );
+   }
+   
+   export default App;
+  ```
