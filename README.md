@@ -8,7 +8,7 @@
 ## react-study
 - ReactEX와 별개로 따로 폴더를 만들어 학습 중..
 
-### 학습 시작
+### 개발 환경 구축
 1. node.js 다운
 2. 터미널 열어서 아래 확인
    ```
@@ -62,7 +62,7 @@
    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install prop-types
    ```
 
-### 코딩 시작
+### 학습 시작
 1. useState에 이어서 useEffect 사용법
    - App.js
      ```
