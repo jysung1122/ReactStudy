@@ -253,11 +253,12 @@
         const [coins, setCoins] = useState([]);
       
         useEffect(() => {
+          // Coinpaprika API에서 코인 정보를 가져오는 함수
           fetch("https://api.coinpaprika.com/v1/tickers?limit=10 ") // ?limit=10 -> 이용하여 최대 2000개 까지 가능
-            .then((response) => response.json())
+            .then((response) => response.json())    // 응답 본문을 JSON 데이터로 파싱
             .then((json) => {
-              setCoins(json);
-              setLoading(false);
+              setCoins(json);      // JSON 데이터를 coins 상태 변수에 저장
+              setLoading(false);   // 로딩 상태를 false로 설정 (데이터 로딩 완료)
             });
         }, []);
       
