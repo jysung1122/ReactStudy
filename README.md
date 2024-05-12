@@ -61,6 +61,10 @@
    ```
    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install prop-types
    ```
+9. React Router 설치 : 페이지를 전환해주는 기능 제공 ( 버전 : "react-router-dom": "^6.23.1" )
+    ```
+    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install react-router-dom@latest
+    ```
 
 ### 학습 시작
 1. useState에 이어서 useEffect 사용법
