@@ -242,3 +242,91 @@
       export default App;
 
      ```
+4. 코인 API 받아와서 달러를 입력하면 몇개의 코인을 얻을 수 있는 지 환전하는 코드
+   ```
+   import { useEffect, useState } from 'react';
+
+   function App() {
+   
+     const [loading, setLoading] = useState(true);
+     const [coins, setCoins] = useState([]);
+   
+     useEffect(() => {
+       fetch("https://api.coinpaprika.com/v1/tickers?limit=10 ") // ?limit=10 -> 이용하여 최대 2000개 까지 가능
+         .then((response) => response.json())
+         .then((json) => {
+           setCoins(json);
+           setLoading(false);
+         });
+     }, []);
+   
+     function USDToCoin() {
+       const [amount, setAmount] = useState(0);
+       const [selectedCoinId, setSelectedCoinId] = useState(0); // 선택된 코인의 id를 관리하는 상태
+     
+       const reset = () => {
+         setAmount(0);
+         setSelectedCoinId(0); // 리셋 시 선택된 코인 id도 초기화
+       };
+     
+       const onChange = (event) => {
+         setAmount(event.target.value);
+       };
+     
+       const selectedCoin = coins.find((coin) => coin.id === selectedCoinId); // 선택된 코인 객체 찾기
+   
+       return (
+         <div>
+           <div>
+             <select value={selectedCoinId} onChange={(e) => setSelectedCoinId(e.target.value)}>
+               <option value="0">Select a coin</option>
+               {coins.map((coin) => (
+                 <option key={coin.id} value={coin.id}>
+                   {coin.name} ({coin.symbol}): ${coin.quotes.USD.price} USD
+                 </option>
+               ))}
+             </select>
+           </div>
+           <hr />
+           <div>
+             <label>If You have </label>
+             <input
+               value={amount}
+               id="usd"
+               placeholder="USD"
+               type="number"
+               onChange={onChange}
+             />
+             <label> USD</label>
+           </div>
+           <div>
+             <label>So You have </label>
+             <input
+               value={selectedCoin ? (amount / selectedCoin.quotes.USD.price) : ""}
+               id="coin"
+               placeholder="COINS"
+               type="number"
+               onChange={onChange}
+               disabled
+             />
+             <label> {selectedCoin ? selectedCoin.symbol : ''}</label>
+           </div>
+           <button onClick={reset}>Reset</button>
+         </div>
+       );
+     }
+   
+     return (
+       <div>
+         <h1>The {loading ? "" : `${coins.length}`} Coins</h1>
+         {loading ? (<strong>Loading...</strong>) : 
+           <USDToCoin/>
+         }
+         
+       </div>
+     );
+   }
+   
+   export default App;
+
+   ```
