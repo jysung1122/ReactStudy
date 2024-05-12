@@ -66,8 +66,8 @@
 - useState에 이어서 useEffect 사용법
   ```
    // src/App.js
-   import Button from "./Button";
-   import styles from "./App.module.css";
+   import Button from "./Button.js";         //파일 따로 생성해야함
+   import styles from "./App.module.css";    //파일 따로 생성해야함
    import { useState, useEffect } from "react";
    
    function App() {
