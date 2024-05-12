@@ -110,3 +110,42 @@
    
    export default App;
   ```
+- App.module.css
+- .css와 .module.css의 차이점은 .css는 모든 컴포넌트가 적용되는 반면 .module.css는 원하는 컴포넌트만 css스타일 적용 가능
+  ```
+  .title {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18;
+   }
+  ```
+- Button.js
+  ```
+   import PropTypes from 'prop-types';
+   import styles from './Button.module.css';
+   
+   function Button( {text} ) {
+       return <button className={styles.title}>{text}</button>
+   }
+   
+   Button.propTypes = {
+       text: PropTypes.string.isRequired,
+   }
+   
+   export default Button;
+  ```
+- Button.module.css
+  ```
+   import PropTypes from 'prop-types';
+   import styles from './Button.module.css';
+   
+   function Button( {text} ) {
+       return <button className={styles.title}>{text}</button>
+   }
+   
+   Button.propTypes = {
+       text: PropTypes.string.isRequired,
+   }
+   
+   export default Button;
+  ```
