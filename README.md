@@ -63,89 +63,134 @@
    ```
 
 ### 코딩 시작
-- useState에 이어서 useEffect 사용법
-  ```
-   // src/App.js
-   import Button from "./Button.js";         //파일 따로 생성해야함
-   import styles from "./App.module.css";    //파일 따로 생성해야함
-   import { useState, useEffect } from "react";
+1. useState에 이어서 useEffect 사용법
+   - App.js
+     ```
+      // src/App.js
+      import Button from "./Button.js";         //파일 따로 생성해야함
+      import styles from "./App.module.css";    //파일 따로 생성해야함
+      import { useState, useEffect } from "react";
+      
+      function App() {
+      
+        const [counter, setCounter] = useState(0);
+        const onClick = () => setCounter((prev) => prev + 1);
+      
+        const [keyword, setKeyword] = useState("");
+        const onChange = (event) => setKeyword(event.target.value);
+      
+        //처음 실행될 때 한번만 실행되는 코드
+        useEffect(() => {
+          console.log("i run only once");
+        }, []);
+      
+        //keyword가 변화할때 마다 실행되는 코드
+        useEffect(() => {
+          console.log("i run when keyword changes");
+        },[keyword]);
+      
+        //counter가 변화할때 마다 실행되는 코드
+        useEffect(() => {
+          console.log("i run when counter changes");
+        },[counter]);
+      
+        //keyword & counter가 변화할때 마다 실행되는 코드
+        useEffect(() => {
+          console.log("i run when keyword & counter changes");
+        }, [keyword, counter]);
+      
+        return (
+          <div>
+              <input value={keyword} onChange={onChange} type="text" placeholder="Search here..."/>
+              <h1 className={styles.title}>{counter}</h1>
+              <button onClick={onClick}>Click me</button>
+              <Button text="Continue"/>
+          </div>
+        );
+      }
+      
+      export default App;
+     ```
+   - App.module.css
+   - .css와 .module.css의 차이점은 .css는 모든 컴포넌트가 적용되는 반면 .module.css는 원하는 컴포넌트만 css스타일 적용 가능
+     ```
+     .title {
+       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
+           Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+       font-size: 18;
+      }
+     ```
+   - Button.js
+     ```
+      import PropTypes from 'prop-types';
+      import styles from './Button.module.css';
+      
+      function Button( {text} ) {
+          return <button className={styles.title}>{text}</button>
+      }
+      
+      Button.propTypes = {
+          text: PropTypes.string.isRequired,
+      }
+      
+      export default Button;
+     ```
+   - Button.module.css
+     ```
+      import PropTypes from 'prop-types';
+      import styles from './Button.module.css';
+      
+      function Button( {text} ) {
+          return <button className={styles.title}>{text}</button>
+      }
+      
+      Button.propTypes = {
+          text: PropTypes.string.isRequired,
+      }
+      
+      export default Button;
+     ```
+2. 컴포넌트의 Create와 Destroyed
+   - App.js
+     ```
+      // src/App.js
+      import { useState, useEffect } from "react";
    
-   function App() {
+      function Hello() {
+      
+        function byFn() {
+          console.log("bye :(");
+        }
+      
+        function hiFn() {
+          console.log("created :)");
+          return byFn;
+        }
+      
+        useEffect(hiFn, []);
+      
+        // 위 hiFn()과 같음
+        // useEffect(() => {
+        //   console.log("created :)");
+        //   return () => console.log("destroyed :(");
+        // }, []);
+      
+        return <h1>Hello</h1>;
+      }
+      
+      
+      function App() {
+      
+        const [showing, setShowing] = useState(false);
+        const onClick = () => setShowing((prev) => !prev);
+        return (
+          <div>
+            {showing ? <Hello/> : null}
+            <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+          </div>
+        );
+      }
+      
+      export default App;
    
-     const [counter, setCounter] = useState(0);
-     const onClick = () => setCounter((prev) => prev + 1);
-   
-     const [keyword, setKeyword] = useState("");
-     const onChange = (event) => setKeyword(event.target.value);
-   
-     //처음 실행될 때 한번만 실행되는 코드
-     useEffect(() => {
-       console.log("i run only once");
-     }, []);
-   
-     //keyword가 변화할때 마다 실행되는 코드
-     useEffect(() => {
-       console.log("i run when keyword changes");
-     },[keyword]);
-   
-     //counter가 변화할때 마다 실행되는 코드
-     useEffect(() => {
-       console.log("i run when counter changes");
-     },[counter]);
-   
-     //keyword & counter가 변화할때 마다 실행되는 코드
-     useEffect(() => {
-       console.log("i run when keyword & counter changes");
-     }, [keyword, counter]);
-   
-     return (
-       <div>
-           <input value={keyword} onChange={onChange} type="text" placeholder="Search here..."/>
-           <h1 className={styles.title}>{counter}</h1>
-           <button onClick={onClick}>Click me</button>
-           <Button text="Continue"/>
-       </div>
-     );
-   }
-   
-   export default App;
-  ```
-- App.module.css
-- .css와 .module.css의 차이점은 .css는 모든 컴포넌트가 적용되는 반면 .module.css는 원하는 컴포넌트만 css스타일 적용 가능
-  ```
-  .title {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
-        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 18;
-   }
-  ```
-- Button.js
-  ```
-   import PropTypes from 'prop-types';
-   import styles from './Button.module.css';
-   
-   function Button( {text} ) {
-       return <button className={styles.title}>{text}</button>
-   }
-   
-   Button.propTypes = {
-       text: PropTypes.string.isRequired,
-   }
-   
-   export default Button;
-  ```
-- Button.module.css
-  ```
-   import PropTypes from 'prop-types';
-   import styles from './Button.module.css';
-   
-   function Button( {text} ) {
-       return <button className={styles.title}>{text}</button>
-   }
-   
-   Button.propTypes = {
-       text: PropTypes.string.isRequired,
-   }
-   
-   export default Button;
-  ```
+     ```
