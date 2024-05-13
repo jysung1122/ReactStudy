@@ -69,6 +69,29 @@
     ```
     seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install gh-pages
     ```
+    10-1. package.json 파일 수정 -> 맨 마지막 } 바로 위에 작성
+       ```
+          }, // 마지막에서 두번째 괄호에 콤마 추가
+        "homepage": "https://jysung1122.github.io/React-Study"
+        //"homepage": "https://{YOUR_GITHUB_ID}.github.io/{YOUR_SAVE_REPOSITORY}"
+      }   //-> 맨 마지막 괄호
+       ```
+    10-2. package.json 파일 수정 -> scripts 코드 추가
+       ```
+       "scripts": {
+          "start": "react-scripts start",
+          "build": "react-scripts build",
+          "test": "react-scripts test",
+          "eject": "react-scripts eject",
+          //밑에 두 줄 추가
+          "deploy": "gh-pages -d build",
+          "predeploy": "npm run build"
+        },
+       ```
+    10-3. 아래 코드 실행하면 build폴더를 생성 후 deploy 실행
+       ```
+       seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm run deploy
+       ```
 
 ### 학습 시작
 1. useState에 이어서 useEffect 사용법
