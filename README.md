@@ -72,7 +72,7 @@
     10-1. package.json 파일 수정 -> 맨 마지막 } 바로 위에 작성
        ```
           }, // 마지막에서 두번째 괄호에 콤마 추가
-        "homepage": "https://jysung1122.github.io/React-Study"
+        "homepage": "https://jysung1122.github.io/react-movie"
         //"homepage": "https://{YOUR_GITHUB_ID}.github.io/{YOUR_SAVE_REPOSITORY}"
       }   //-> 맨 마지막 괄호
        ```
@@ -92,6 +92,15 @@
        ```
        seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm run deploy
        ```
+    10-4. 에러 뜰 경우 깃허브에 같은 이름의 repository 생성 (나의 경우 react-movie)
+    
+    10-5. git remote -v 했을때 아무것도 나오지 않는 상태라면 아래 코드로 repository를 추가
+       ```
+       git remote add origin https://github.com/jysung1122/react-movie
+       // git remote add origin https://github.com/{YOUR_ID}/{YOUR_SAVE_REPOSITORY}
+       ```
+    10-5. 10-3 재실행
+
 
 ### 학습 시작
 1. useState에 이어서 useEffect 사용법
