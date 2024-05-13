@@ -89,6 +89,8 @@
         },
        ```
     10-3. 아래 코드 실행하면 build폴더를 생성 후 deploy 실행
+
+    10-1에 작성한 https://jysung1122.github.io/react-movie 열고 살행 확인
        ```
        seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm run deploy
        ```
