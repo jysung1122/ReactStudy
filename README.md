@@ -65,6 +65,10 @@
     ```
     seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install react-router-dom@latest
     ```
+10. Publishing : GitHub Pages에 업로드할 수 있게 해주는 패키지 다운
+    ```
+    seongjaeyong-ui-MacBookAir:react-study seongjaeyong$ npm install gh-pages
+    ```
 
 ### 학습 시작
 1. useState에 이어서 useEffect 사용법
